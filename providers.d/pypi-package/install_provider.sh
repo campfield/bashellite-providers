@@ -17,6 +17,8 @@ main() {
        };
   done
 
+  echo "[INFO] pypi-package successfully installed."
+
 }
 
 main
