@@ -1,5 +1,6 @@
 bashelliteProviderWrapperPypi() {
 
+  local repo_config_file="${_r_metadata_tld}/repos.conf.d/${_n_repo_name}/repo.conf"
   local config_file="${_r_metadata_tld}/repos.conf.d/${_n_repo_name}/provider.conf"
   local pypi_url="${_n_repo_url}"
   local base_dir="${_r_mirror_tld}/${_n_repo_name}/web"
@@ -15,6 +16,13 @@ bashelliteProviderWrapperPypi() {
 
   mkdir -p "${packages_dir}" &>/dev/null \
       || { utilMsg FAIL "$(utilTime)" "Unable to create directory (${packages_dir}); check permissions."; return 1; }
+
+  # Need to parse list_type from repo.conf here
+  local list_param=$(grep -oP "^list_type=.*" ${repo_config_file})
+  declare ${list_param}
+ 
+ 
+  
 
   while read package_line; do 
     # Step 1. Get package listing from $pypi_url/simple/$mirror_package_name/ 
