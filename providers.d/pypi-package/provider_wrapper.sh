@@ -19,7 +19,15 @@ bashelliteProviderWrapperPypi() {
 
   # Need to parse list_type from repo.conf here
   local list_param=$(grep -oP "^list_type=.*" ${repo_config_file})
-  declare ${list_param}
+  if [[ ${list_param} != "" ]]; then
+    declare ${list_param}
+  else
+    declare "list_type=white"
+  fi
+
+  # Sanitize the list_type variable
+  list_type="${list_type//[^a-z-]}"
+  list_type="${list_type//\"/}"
  
  
   
