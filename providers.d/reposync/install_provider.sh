@@ -7,6 +7,8 @@ main() {
 
   for dep in \
              ${bin_name} \
+             dnf \
+             dnf-plugins-core \
              createrepo \
              crudini \
              ; do
