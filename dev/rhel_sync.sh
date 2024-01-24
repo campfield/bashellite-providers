@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MIRROR_TLD=/mirror1
+MIRROR_TLD=/repos
 CACHE_DIR=${MIRROR_TLD}/cache
 REPO_DIR=${MIRROR_TLD}/repos
 DEST_DIR=${REPO_DIR}/redhat

@@ -23,7 +23,7 @@ main() {
     && rm -fr ${providers_tld}/google-repo/exec/* &>/dev/null \
     && curl https://storage.googleapis.com/git-repo-downloads/repo > ${providers_tld}/google-repo/exec/repo \
     && chmod ug+x ${providers_tld}/google-repo/exec/repo;
-    
+
     # Ensure google repo installed successfully
     if [ -s "${providers_tld}/google-repo/exec/repo" ]
     then

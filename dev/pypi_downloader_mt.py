@@ -24,7 +24,7 @@ class DownloadErrorCounter():
 
     def get_counter(self):
         return self.error_count
-    
+
 
 # This function grabs a list of all the packages at the pypi index site specified by 'baseurl'
 def getPackageListFromIndex(baseurl):
@@ -60,7 +60,7 @@ def getPackageListFromIndex(baseurl):
         retpkgs = newpkgs
 
     return retpkgs
-        
+
 
 # This function parses the command line arguments
 def parseCommandLine():
@@ -68,7 +68,7 @@ def parseCommandLine():
         description="Script to mirror pypi packages",
         epilog="If neither '-c' nor '-i' are given, packages are read from stdin."
         )
-    parser.add_argument('-m', dest='mirror_tld', default='/mirror1/repos', help='Base directory to store repos')
+    parser.add_argument('-m', dest='mirror_tld', default='/repos/repos', help='Base directory to store repos')
     parser.add_argument('-r', dest='repo_name', help='repo name for storing packages in', required=True)
     parser.add_argument('-u', dest='repo_url', default='https://pypi.org', help='URL of pypi index site')
     parser.add_argument('-t', dest='thread_count', type=int, default=5, help='Number of threads to use for downloading files')
@@ -189,7 +189,7 @@ def shouldDownload(pkg, base_url, base_file_loc):
         logging.warn("TooManyRedirects error while getting index for package " + pkg + ": {0}".format(err))
     except Exception as err:
         logging.warn("Unknown Error: {}".format(err))
-    
+
     return should_download
 
 
@@ -276,7 +276,7 @@ def processPackageFiles(pkg_name, base_url, base_save_loc, thread_count):
 ######################################### Start of main processing
 
 if __name__ == "__main__":
-    
+
     logging.basicConfig(level=logging.INFO, format='[%(levelname)s]: %(message)s')
     args = parseCommandLine()
 
@@ -318,4 +318,4 @@ if __name__ == "__main__":
 
 
 
-            
+

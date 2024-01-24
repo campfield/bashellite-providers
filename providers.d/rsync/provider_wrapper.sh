@@ -7,7 +7,8 @@ bashelliteProviderWrapperRsync() {
   else
     local dryrun_flag="";
   fi
-
+#    --delete \
+#    --delete-before \
   rsync -avSP ${_n_repo_url} \
     ${dryrun_flag} \
     --exclude-from="${_r_metadata_tld}/repos.conf.d/${_n_repo_name}/provider.conf" \
@@ -16,8 +17,6 @@ bashelliteProviderWrapperRsync() {
     --hard-links \
     --update \
     --links \
-    --delete \
-    --delete-before \
     --ignore-existing \
     ${_r_mirror_tld}/${_n_mirror_repo_name}
 
@@ -27,4 +26,4 @@ bashelliteProviderWrapperRsync() {
     utilMsg INFO "$(utilTime)" "rsync completed successfully for repo (${_n_repo_name})."
   fi
 
-} 
+}

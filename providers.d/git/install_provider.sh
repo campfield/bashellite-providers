@@ -9,7 +9,7 @@ main() {
              bash \
              sh \
              perl \
-             python \
+             python3 \
              less \
              rsync \
              ${bin_name} \

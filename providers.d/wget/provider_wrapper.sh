@@ -44,7 +44,7 @@ bashelliteProviderWrapperWget() {
     utilMsg INFO "$(utilTime)" "    To => ${_r_mirror_tld}/${_n_mirror_repo_name}/${line}"
     local wget_args=""
     local wget_args="${wget_dryrun_flag}"
-    local wget_args="${wget_args} -nv -nH -e robots=off -N"
+    local wget_args="${wget_args} -nH -e robots=off -N"
     local wget_args="${wget_args} ${recurse_flag}"
     # If we have a non-recursive file specified, don't use the --accept option
     if [[ ${recurse_flag} != "" ]]; then

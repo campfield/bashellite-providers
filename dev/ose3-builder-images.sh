@@ -1,6 +1,6 @@
 #!/bin/bash
 
-out_path=/mirror1/docker-images
+out_path=/repos/docker-images
 
 # S2I Images
 ose_s2i_tags=latest

@@ -46,7 +46,7 @@ def parseCommandLine():
         description="Script to mirror pypi packages",
         epilog="If neither '-c' nor '-i' are given, packages are read from stdin."
         )
-    parser.add_argument('-m', dest='mirror_tld', default='/mirror1/repos', help='Base directory to store repos')
+    parser.add_argument('-m', dest='mirror_tld', default='/repos/repos', help='Base directory to store repos')
     parser.add_argument('-r', dest='repo_name', help='repo name for storing packages in', required=True)
     parser.add_argument('-u', dest='repo_url', default='https://pypi.org', help='URL of pypi index site')
     group = parser.add_mutually_exclusive_group()
@@ -99,7 +99,7 @@ def shouldDownload(pkg, base_url, base_file_loc):
         logging.warn("TooManyRedirects error while getting index for package " + pkg + ": {0}".format(err))
     except Exception as err:
         logging.warn("Unknown Error: {}".format(err))
-    
+
     return should_download
 
 
@@ -226,13 +226,13 @@ def processPackageFiles(pkg_name, base_url, base_save_loc):
     else:
         error_found = False
 
-    return error_found                          
+    return error_found
 
 
 ######################################### Start of main processing
 
 if __name__ == "__main__":
-    
+
     logging.basicConfig(level=logging.INFO, format='[%(levelname)s]: %(message)s')
     args = parseCommandLine()
 

@@ -5,7 +5,7 @@ main() {
   #local providers_tld="/opt/bashellite/providers.d";
 
   for dep in \
-             pip \
+             pip3 \
              virtualenv \
              rm \
              ; do
@@ -21,8 +21,8 @@ main() {
   || {
        echo "[WARN] bandersnatch does NOT appear to be installed, (or it is broken); (re)installing..." \
        && rm -fr ${providers_tld}/bandersnatch/exec/ &>/dev/null \
-       && virtualenv --python=python3.5 ${providers_tld}/bandersnatch/exec/ \
-       && ${providers_tld}/bandersnatch/exec/bin/pip install -r https://bitbucket.org/pypa/bandersnatch/raw/stable/requirements.txt;
+       && virtualenv ${providers_tld}/bandersnatch/exec/ \
+       && ${providers_tld}/bandersnatch/exec/bin/pip3 install bandersnatch dataclasses;
      };
   # Ensure bandersnatch installed successfully
   {

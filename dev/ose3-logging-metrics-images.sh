@@ -1,6 +1,6 @@
 #!/bin/bash
 
-out_path=/mirror1/docker-images
+out_path=/repos/docker-images
 tag=v3.9.14
 
 ##### Logging and Metrics

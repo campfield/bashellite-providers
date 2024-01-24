@@ -1,6 +1,6 @@
 #!/bin/bash
 
-out_path=/mirror1/docker-images
+out_path=/repos/docker-images
 
 # OpenShift Container Platform containerized components
 ose_tag="v3.9.14"

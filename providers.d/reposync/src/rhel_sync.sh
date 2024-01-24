@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEST_DIR=/mirror1/
+DEST_DIR=/repos/
 
 declare -a repos=(
 # Base RHEL

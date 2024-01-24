@@ -1,5 +1,7 @@
 bashelliteProviderWrapperGem() {
   local ruby_ver="2.5.1"
+  local ruby_ver="$(ruby -v | awk '{print $2}')"
+
   local mirror_file="${HOME}/.gem/.mirrorrc"
   utilMsg INFO "$(utilTime)" "Copying config contents to ${HOME}/.gem/.mirrorrc"
   if [[ ! -d "${HOME}/.gem" ]]; then
@@ -18,13 +20,22 @@ bashelliteProviderWrapperGem() {
 
   utilMsg INFO "$(utilTime)" "Checking for required gems for mirroring..."
   local gem_bin=${HOME}/.rubies/ruby-${ruby_ver}/bin/gem
+
+  # campfield - not sure why there is a direct reference to Ruby versions
+  #  however, I'm smarter than everybody else so I'm just going to do a which gem.
+  local gem_bin=$(which gem)
+  if [[ -z $gem_bin ]]; then
+    echo "Binary for Ruby [gem] not found."
+    exit 1
+  fi
+
   local gemlist=$(${gem_bin} list)
   for gem in \
       hoe \
       net-http-persistent \
       rubygems-mirror \
       ; do
-    if [[ "${gemlist}" != *"${gem}"* ]]; then 
+    if [[ "${gemlist}" != *"${gem}"* ]]; then
       utilMsg WARN "$(utilTime)" "${gem} gem dependency not found.  Installing..."
       ${gem_bin} install ${gem}
       gemlist=$(${gem_bin} list)
@@ -36,7 +47,7 @@ bashelliteProviderWrapperGem() {
       fi
     else
       utilMsg INFO "$(utilTime)" "Required gem ${gem} already installed..."
-    fi 
+    fi
   done
 
   utilMsg INFO "$(utilTime)" "Downloading gems from gem server..."
