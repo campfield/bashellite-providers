@@ -2,7 +2,7 @@
 
 main() {
 
-  #local providers_tld="/opt/bashellite/providers.d";
+#  local providers_tld="/opt/bashellite/providers.d";
 
   for dep in \
              git \

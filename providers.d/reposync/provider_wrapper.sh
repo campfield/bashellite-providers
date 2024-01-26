@@ -1,7 +1,7 @@
 bashelliteProviderWrapperReposync() {
 
   utilMsg INFO "$(utilTime)" "Proceeding with sync of repo site (${_n_repo_name}) using ${_n_repo_provider}..."
-
+  local reposync_options="--newest-only --norepopath --downloadcomps --download-metadata --arch=x86_64"
   local config_file="${_r_metadata_tld}/repos.conf.d/${_n_repo_name}/provider.conf"
   local save_loc="${_r_mirror_tld}/${_n_mirror_repo_name}"
 
@@ -16,7 +16,7 @@ bashelliteProviderWrapperReposync() {
         # newstr=${oldstr#http*//*/}
         # Parse the directory structure from the baseurl
         local save_dir=${repo_base#http*//*/}
-        reposync -c ${config_file} --repoid ${repo_id} -p ${save_loc}/${save_dir} --norepopath --downloadcomps --download-metadata
+        dnf reposync -c ${config_file} --repoid ${repo_id} -p ${save_loc}/${save_dir} ${reposync_options}
         local return_val="${?}"
         if [[ "${return_val}" == "0" ]]; then
           if [[ -s ${save_loc}/${save_dir}/comps.xml ]]; then

@@ -7,11 +7,12 @@ bashelliteProviderWrapperRsync() {
   else
     local dryrun_flag="";
   fi
-#    --delete \
-#    --delete-before \
+
   rsync -avSP ${_n_repo_url} \
     ${dryrun_flag} \
     --exclude-from="${_r_metadata_tld}/repos.conf.d/${_n_repo_name}/provider.conf" \
+    --delete \
+    --delete-after \
     --safe-links \
     --no-motd \
     --hard-links \

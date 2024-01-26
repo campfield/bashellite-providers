@@ -53,13 +53,14 @@ main() {
     echo "[INFO] Podman non-root user packages installed successfully"
   fi
 
-  # Need to set user.max_user_namespaces to a decent value greater than 0.
-  local max_namespaces=$(sysctl user.max_user_namespaces | grep -oP "(?<=user\.max_user_namespaces[[:blank:]]=[[:blank:]])\d+")
+  if [[ ! -z $(which sysctl 2>/dev/null) ]]; then
+    # Need to set user.max_user_namespaces to a decent value greater than 0.
+    local max_namespaces=$(sysctl user.max_user_namespaces | grep -oP "(?<=user\.max_user_namespaces[[:blank:]]=[[:blank:]])\d+")
 
-  if [[ ${max_namespaces} == "0" ]]; then
-    sysctl -q user.max_user_namespaces=15000
+    if [[ ${max_namespaces} == "0" ]]; then
+      sysctl -q user.max_user_namespaces=15000
+    fi
   fi
-
   # Need to add parsing the /etc/subuid and /etc/subgid files looking for the bashellite user to update
   # If bashellite user is not in the files, need to add with a start range higher than what is already present
   # Format of lines in each file:
@@ -91,8 +92,8 @@ main() {
         fi
       fi
     done < ${file}
-    # Here we check if user is not found, if not, we add the user to the end of the file 
-    # with a subid start value == max_userspace_num and a subid range value == 65535 
+    # Here we check if user is not found, if not, we add the user to the end of the file
+    # with a subid start value == max_userspace_num and a subid range value == 65535
     if [[ ${user_found} == "false" ]]; then
       if [[ ${max_userspace_num} > 0 ]]; then
         echo "${username}:${max_userspace_num}:65536" >> ${file}

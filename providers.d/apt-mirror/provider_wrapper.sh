@@ -6,6 +6,10 @@ bashelliteProviderWrapper() {
     utilMsg WARN "$(utilTime)" "The \"base_path\" parameter ("${basepath_parameter}") in provider.conf does not match mirror location (${_r_mirror_tld}/${_n_mirror_repo_name})..."
   fi
 
+  if [[ ! -d ${HOME}/.bashellite ]]; then
+    mkdir -p ${HOME}/.bashellite || (echo "Unable to create directory [${HOME}/.bashellite], exiting."; exit 1)
+  fi
+
   local config_file="${_r_metadata_tld}/repos.conf.d/${_n_repo_name}/provider.conf"
   local tmp_config_file="${HOME}/.bashellite/tmp_${_n_repo_name}_provider.conf"
 
