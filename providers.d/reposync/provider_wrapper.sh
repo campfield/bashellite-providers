@@ -16,6 +16,7 @@ bashelliteProviderWrapperReposync() {
         # newstr=${oldstr#http*//*/}
         # Parse the directory structure from the baseurl
         local save_dir=${repo_base#http*//*/}
+        local save_dir=${repo_id}
         dnf reposync -c ${config_file} --repoid ${repo_id} -p ${save_loc}/${save_dir} ${reposync_options}
         local return_val="${?}"
         if [[ "${return_val}" == "0" ]]; then
