@@ -7,7 +7,7 @@ bashelliteProviderWrapperReposync() {
 
   while read line; do
     local repo_id=""
-    repo_id=$(echo ${line} | grep -oP "(?<=\[)[[:graph:]]+(?=\])")
+    repo_id=$(echo ${line} | tr -d ' ' | grep -oP "(?<=\[)[[:graph:]]+(?=\])")
     if [[ ${repo_id} != "" ]]; then
       local repo_base=$(crudini --get ${config_file} ${repo_id} baseurl)
       local repo_enabled=$(crudini --get ${config_file} ${repo_id} enabled)
