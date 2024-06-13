@@ -1,7 +1,7 @@
 bashelliteProviderWrapperReposync() {
 
   utilMsg INFO "$(utilTime)" "Proceeding with sync of repo site (${_n_repo_name}) using ${_n_repo_provider}..."
-  local reposync_options="--newest-only --norepopath --downloadcomps --download-metadata --arch=x86_64"
+  local reposync_options="--newest-only --norepopath --downloadcomps --download-metadata"
   local config_file="${_r_metadata_tld}/repos.conf.d/${_n_repo_name}/provider.conf"
   local save_loc="${_r_mirror_tld}/${_n_mirror_repo_name}"
 
